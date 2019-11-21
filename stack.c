@@ -63,4 +63,79 @@ int Pop(SqStack*S,datatype&x)
 	}
 }
 
-//
+//qv zhanding yvansu
+int GetStack(SqStack*S,datatype&x)
+{
+	if(Empty(S))
+	{
+		printf("zhan xia yi\n");
+		return 0;
+	}
+	else
+	{
+		x=S->data[S->Top];
+		return 1;
+	}
+}
+
+//liang ge stack gongxiang lianxv space
+//zheyangde shujv storage struct
+typedef struct{
+	datatype v[maxsize];
+	int Top1,Top2;
+}SqStack;
+SqStack*S=(SqStack*)malloc(sizeof(SqStack));
+
+
+//jin zhan
+void Pushh(SqStack*S,datatype x,int i)//to insert x to i hao zhan
+{
+	if(S->Top1+1==S->Top2)
+	{
+		printf("zhan shang yi");
+	}
+	else if(i==1)
+		S->v[++S->Top1]=x;
+	else
+		S->v[--S->Top2]=x;
+}
+
+//chu zhan
+datatype Popp(SqStack*S,int i)
+{
+	datatype x;
+	if(i==1)
+		if(S->Top1==-1)
+			printf("1 hao zhan xiayi");
+		else
+			x=S->v[S->Top1--];//bushi Top
+	else if(S->Top2==maxsize)
+		printf("er hao zhan xiayi");
+	else
+		x=S->v[S->Top2++];
+	return x;
+}
+
+//xiaokuohao pipei
+void corrent(char ex[])
+{
+	SqStack*S;
+	InitSqStack(S);
+	int i=0;
+	while(i<strlen(ex[]))
+	{
+		ch=ex[i];
+		switch(ch)
+		{
+			case '(':
+			Push(S,ch);
+			break;
+			case ')':
+			if(Empty(S)||Pop(S)!='(')
+				return "expect(";
+		}
+		i++;
+	}
+	if(!Empty(S)) return "expect)";
+	else return"OK";
+}
