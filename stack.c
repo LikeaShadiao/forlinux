@@ -139,3 +139,76 @@ void corrent(char ex[])
 	if(!Empty(S)) return "expect)";
 	else return"OK";
 }
+
+
+//Linked Stack data store struct
+typedef struct node
+{
+	datatype data;
+	struct node* next;
+}StackNode;
+typedef struct
+{
+	StackNode *Top;
+}LinkStack;
+
+//jianli LinkStack
+void InitStack(LinkStack*&S)
+{
+	S=(LinkStack*)malloc(sizeof(LinkStack));
+	S->Top=NULL;
+}
+
+
+//zhikong LinkStack
+void SetNull(LinkStack*S)
+{
+	S->Top=NULL;
+}
+
+
+//LinkStack ruzhan
+void Push(LinkStack*S,datatype x)
+{
+	StackNode *p=(StackNode*)malloc(sizeof(StackNode));
+	p->data=x;
+	p->next=S->Top;
+	S->Top=p;
+}
+
+//LinkStack chuzhan
+int Pop(LinkStack*S,datatype&x)
+{
+	StackNode*p=(StackNode*)malloc(sizeof(StackNode));
+	p=S->Top;
+	if(Empty(S))//The function 'Empty' is similar to normal stack.
+	{
+		printf("zhan xiayi");
+		return 0;
+	}
+	else
+	{
+		x=p->data;//ForgotS
+		S->Top=p->next;
+		free(p);
+		return 1;
+	}
+}
+
+
+int GetTop(LinkStack*S,datatype&x)
+{
+	StackNode*p=S->Top;
+	if(Empty(S))//The function 'Empty' is similar to normal stack.
+	{
+		printf("zhan xiayi");
+		return 0;
+	}
+	else
+	{
+		x=p->data;//ForgotS
+		return 1;
+	}
+}
+
+//next to queue
